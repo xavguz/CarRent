@@ -11,6 +11,14 @@ package ec.edu.espol.carrent;
 public class CarRent {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        try {
+            DBconnection db = DBconnection.getInstance();
+            if (db.getConnection() != null) {
+                System.out.println("¡Conexión exitosa a la base de datos!");
+            }
+        } catch (Exception e) {
+            System.out.println("Error al conectar: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

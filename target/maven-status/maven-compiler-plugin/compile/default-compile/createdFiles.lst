@@ -1,1 +1,3 @@
 ec\edu\espol\carrent\CarRent.class
+ec\edu\espol\carrent\DBconnection.class
+ec\edu\espol\carrent\Persona.class
