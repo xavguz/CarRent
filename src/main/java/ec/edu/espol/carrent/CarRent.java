@@ -4,6 +4,11 @@
 
 package ec.edu.espol.carrent;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author Nueva
@@ -11,14 +16,9 @@ package ec.edu.espol.carrent;
 public class CarRent {
 
     public static void main(String[] args) {
-        try {
-            DBconnection db = DBconnection.getInstance();
-            if (db.getConnection() != null) {
-                System.out.println("¡Conexión exitosa a la base de datos!");
-            }
-        } catch (Exception e) {
-            System.out.println("Error al conectar: " + e.getMessage());
-            e.printStackTrace();
-        }
+        
+        Pantalla p = new Pantalla();
+        
+        p.mostrarReportes();
     }
 }
