@@ -95,7 +95,8 @@ public class Pantalla {
             System.out.println("1. Añadir");
             System.out.println("2. Consultar");
             System.out.println("3. Editar");
-            System.out.println("4. Editar");
+            System.out.println("4. Eliminar");
+            System.out.println("5. Salir");
             
             opcion = sc.nextInt();;
             
