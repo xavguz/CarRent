@@ -18,6 +18,7 @@ public class Pantalla {
     Eliminar eliminar = new Eliminar();
     
     Scanner sc = new Scanner(System.in);
+    Consultar consultar = new Consultar();
     
     public void mostrarReportes(){
         
@@ -28,13 +29,15 @@ public class Pantalla {
             System.out.println("1. Mostrar Vehiculos Disponibles");
             System.out.println("2. Mostrar Ingresos");
             System.out.println("3. Eliminar Registros");
-            System.out.println("4. Salir");
+            System.out.println("4. Consultar Registros");  
+            System.out.println("0. Salir");
             
             opcion = sc.nextInt();
             
             consultas(opcion);
-        
-        } while (opcion != 4);
+
+        } while (opcion != 0);
+
     }
     
     public void consultaVehiculosDisponibles(){
@@ -102,6 +105,7 @@ public class Pantalla {
                         System.out.println("10. Eliminar registro de la tabla Servicio");
                         System.out.println("11. Eliminar registro de la tabla Modificacion");
                         System.out.println("12. Eliminar registro de la tabla Mantenimiento");
+                        System.out.println("13. SALIR");
                         
                         subOpcion = sc.nextInt();
                         sc.nextLine();
@@ -170,8 +174,106 @@ public class Pantalla {
                                 System.out.println("Opcion incorrecta");
                             
                         }
-                    }while (subOpcion != 12);
-                break;
+                    }while (subOpcion != 13);
+            case 4:
+                int subOpcion2;
+                   do {
+                        System.out.println("-----Seleccione que desea consultar-----");
+                        System.out.println("1. Consultar Anexos");
+                        System.out.println("2. Consultar Clientes");
+                        System.out.println("3. Consultar Clientes Empesariales");
+                        System.out.println("4. Consultar Clientes Naturales");
+                        System.out.println("5. Consultar Contratos");
+                        System.out.println("6. Consultar Correos de Clientes");
+                        System.out.println("7. Consultar Correos de Empleados");
+                        System.out.println("8. Consultar Empleados");
+                        System.out.println("9. Consultar Registro de Facturas");
+                        System.out.println("10. Consultar Facturas Emitidas");
+                        System.out.println("11. Consultar Facturas Recibidas");
+                        System.out.println("12. Consultar Facturas Recibidas de Servicios");
+                        System.out.println("13. Consultar Mantenimientos");
+                        System.out.println("14. Consultar Modificaciones");
+                        System.out.println("15. Consultar Multas");
+                        System.out.println("16. Consultar Ordenes de Compra");
+                        System.out.println("17. Consultar Servicios");
+                        System.out.println("18. Consultar Sucursales");
+                        System.out.println("19. Consultar Telefonos de Clientes");
+                        System.out.println("20. Consultar Telefonos de Empleados");
+                        System.out.println("21. Consultar Vehiculos");
+                        System.out.println("22. SALIR");
+                        
+                        subOpcion2 = sc.nextInt();
+                        sc.nextLine();
+                        
+                        switch (subOpcion2) {
+                            case 1:
+                                consultar.consultarAnexo();
+                                break;
+                            case 2:
+                                consultar.consultarCliente();
+                                break;
+                            case 3:
+                                consultar.consultarClienteEmpresa();
+                                break;
+                            case 4:
+                                consultar.consultarClienteNatural();
+                                break;
+                            case 5:
+                                consultar.consultarContrato();
+                                break;
+                            case 6:
+                                consultar.consultarCorreoCliente();
+                                break;
+                            case 7:
+                                consultar.consultarCorreoEmpleado();
+                                break;
+                            case 8:
+                                consultar.consultarEmpleado();
+                                break;
+                            case 9:
+                                consultar.consultarFactura();
+                                break;
+                            case 10:
+                                consultar.consultarFacturaEmitida();
+                                break;
+                            case 11:
+                                consultar.consultarFacturaRecibida();
+                                break;
+                            case 12:
+                                consultar.consultarFacturaRecibidaServicio();
+                                break;
+                            case 13:
+                                consultar.consultarMantenimientos();
+                                break;
+                            case 14:
+                                consultar.consultarModificaciones();
+                                break;
+                            case 15:
+                                consultar.consultarMultas();
+                                break;
+                            case 16:
+                                consultar.consultarOrdenCompra();
+                                break;
+                            case 17:
+                                consultar.consultarServicios();
+                                break;
+                            case 18:
+                                consultar.consultarSucursal();
+                                break;
+                            case 19:
+                                consultar.consultarTelefonoCliente();
+                                break;
+                            case 20:
+                                consultar.consultarTelefonoEmpleado();
+                                break;
+                            case 21:
+                                consultar.consultarVehiculos();
+                                break;
+                            default:
+                                System.out.println("Opcion incorrecta");
+                        }
+                }while (subOpcion2 != 22);
         }
+  
     }
 }
