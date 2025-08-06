@@ -94,8 +94,8 @@ public class Añadir {
         try {
             Connection conn = DBconnection.getInstance().getConnection();
             
-            String sql = "insert into Contratos (noContrato, idSucursal, idCliente, tipoContrato, "
-                         + "fechaEmision, seguro, estado, kmEstablecidos, diaPago) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "insert into Contrato (noContrato, id_sucursal, id_cliente, tipo_contrato, "
+                         + "fecha_emision, seguro, estado, km_establecidos, dia_pago) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
 
             
@@ -128,8 +128,8 @@ public class Añadir {
         try {
             Connection conn = DBconnection.getInstance().getConnection();
             
-            String sql = "insert into Orden_Compra (idOrdenCompra, idAnexo, fechaEmision, estado, "
-                    + "fechaEntrega, monto, concecionaria) values (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "insert into Orden_Compra (id_orden_compra, id_anexo, fecha_emision, estado, "
+                    + "fecha_entrega, monto, concecionaria) values (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
 
             
@@ -162,8 +162,8 @@ public class Añadir {
         try {
             Connection conn = DBconnection.getInstance().getConnection();
             
-            String sql = "insert into Vehiculos (placa, idAnexo, idOrdenCompra, modelo, "
-                    + "marca, chasis, tipoVehiculo, kilometraje, año, ramv, estado, pvp) "
+            String sql = "insert into Vehiculos (placa, id_anexo, id_orden_compra, modelo, "
+                    + "marca, chasis, tipo_vehiculo, kilometraje, año, ramv, estado, pvp) "
                     + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -185,7 +185,7 @@ public class Añadir {
             int insert = ps.executeUpdate();
             
             if (insert > 0) {
-                System.out.println("OrdenCompra añadida correctamente.");
+                System.out.println("Vehiculo añadida correctamente.");
             }
             
         } catch (Exception  e) {
@@ -199,8 +199,8 @@ public class Añadir {
         try {
             Connection conn = DBconnection.getInstance().getConnection();
             
-            String sql = "insert into Anexo (idAnexo, noContrato, fechaInicio, tipoUsoOperativo, "
-                    + "fechaFin, costo) values (?, ?, ?, ?, ?, ?)";
+            String sql = "insert into Anexo (id_anexo, noContrato, fecha_inicio, tipo_uso_operativo, "
+                    + "fecha_fin, costo) values (?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
 
             
@@ -214,7 +214,7 @@ public class Añadir {
             int insert = ps.executeUpdate();
             
             if (insert > 0) {
-                System.out.println("OrdenCompra añadida correctamente.");
+                System.out.println("Anexo añadida correctamente.");
             }
             
         } catch (Exception  e) {
@@ -226,7 +226,7 @@ public class Añadir {
         try {
             Connection conn = DBconnection.getInstance().getConnection();
             
-            String sql = "insert into Servicio (idServicio, fecha, costo, lugar) values (?, ?, ?, ?)";
+            String sql = "insert into Servicios (id_servicio, fecha, costo, lugar) values (?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
 
             
@@ -238,7 +238,7 @@ public class Añadir {
             int insert = ps.executeUpdate();
             
             if (insert > 0) {
-                System.out.println("OrdenCompra añadida correctamente.");
+                System.out.println("Servicio añadida correctamente.");
             }
             
         } catch (Exception  e) {
@@ -252,8 +252,8 @@ public class Añadir {
         try {
             Connection conn = DBconnection.getInstance().getConnection();
             
-            String sql = "insert into Factura (noFactura, fechaEmision, estadoPago, fechaPago, "
-                    + "monto, metodoPago) values (?, ?, ?, ?, ?, ?)";
+            String sql = "insert into Factura (noFactura, fecha_emision, estado_pago, fecha_pago, "
+                    + "monto, metodo_pago) values (?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
 
             
@@ -265,11 +265,266 @@ public class Añadir {
             int insert = ps.executeUpdate();
             
             if (insert > 0) {
-                System.out.println("OrdenCompra añadida correctamente.");
+                System.out.println("Factura añadida correctamente.");
             }
             
         } catch (Exception  e) {
             e.printStackTrace();
         }
     }
+    
+    public void añadirClienteNatural(String id_cliente, String cedula, String nombre, String apellido){
+        try {
+            Connection conn = DBconnection.getInstance().getConnection();
+            
+            String sql = "insert into cliente_natural (id_cliente, cedula, nombre, apellido) values (?, ?, ?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            
+            ps.setString(1, id_cliente);
+            ps.setString(2, cedula);
+            ps.setString(3, nombre);
+            ps.setString(4, apellido);
+
+            int insert = ps.executeUpdate();
+            
+            if (insert > 0) {
+                System.out.println("ClienteNatural añadida correctamente.");
+            }
+            
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void añadirClienteEmpresa(String id_cliente, String RUC, String nombreEmpresa){
+        try {
+            Connection conn = DBconnection.getInstance().getConnection();
+            
+            String sql = "insert into cliente_empresa (id_cliente, RUC, nombreEmpresa) values (?, ?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            
+            ps.setString(1, id_cliente);
+            ps.setString(2, RUC);
+            ps.setString(3, nombreEmpresa);
+
+            int insert = ps.executeUpdate();
+            
+            if (insert > 0) {
+                System.out.println("ClienteEmpresa añadida correctamente.");
+            }
+            
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void añadirModificacion(String idModificacion, String tipo){
+        try {
+            Connection conn = DBconnection.getInstance().getConnection();
+            
+            String sql = "insert into Modificaciones (id_servicio_modificacion, tipo_modificacion) values (?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            
+            ps.setString(1, idModificacion);
+            ps.setString(2, tipo);
+
+            int insert = ps.executeUpdate();
+            
+            if (insert > 0) {
+                System.out.println("Modificacion añadida correctamente.");
+            }
+            
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void añadirMantenimiento(String idMantemiento, String causa){
+        try {
+            Connection conn = DBconnection.getInstance().getConnection();
+            
+            String sql = "insert into Mantenimientos (id_servicio_mantemiento, causa) values (?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            
+            ps.setString(1, idMantemiento);
+            ps.setString(2, causa);
+
+            int insert = ps.executeUpdate();
+            
+            if (insert > 0) {
+                System.out.println("Mantenimiento añadida correctamente.");
+            }
+            
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void añadirVehiculoServicio(String placa, String idServicio){
+        try {
+            Connection conn = DBconnection.getInstance().getConnection();
+            
+            String sql = "insert into vehiculo_servicios (placa, id_servicio) values (?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            
+            ps.setString(1, placa);
+            ps.setString(2, idServicio);
+
+            int insert = ps.executeUpdate();
+            
+            if (insert > 0) {
+                System.out.println("VehiculoServicio añadida correctamente.");
+            }
+            
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void añadirMulta(String id_multa, String id_cliente, java.sql.Date fecha, String causa, Double costo){
+        try {
+            Connection conn = DBconnection.getInstance().getConnection();
+            
+            String sql = "insert into Multa (id_multa, id_cliente, fecha, causa, costo) values (?, ?, ?, ?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            
+            ps.setString(1, id_cliente);
+            ps.setString(2, id_cliente);
+            ps.setDate(3, fecha);
+            ps.setString(4, causa);
+            ps.setDouble(5, costo);
+
+            int insert = ps.executeUpdate();
+            
+            if (insert > 0) {
+                System.out.println("Multa añadida correctamente.");
+            }
+            
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void añadirFacturaRecibida(String noContrato, String idOrdenCompra){
+        try {
+            Connection conn = DBconnection.getInstance().getConnection();
+            
+            String sql = "insert into factura_recibida (noFactura, id_orden_compra) values (?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            
+            ps.setString(1, noContrato);
+            ps.setString(2, idOrdenCompra);
+
+            int insert = ps.executeUpdate();
+            
+            if (insert > 0) {
+                System.out.println("FacturaRecibida añadida correctamente.");
+            }
+            
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void añadirFacturaEmitida(String noFactura, String idAnexo, String idMulta ) {
+        try {
+            Connection conn = DBconnection.getInstance().getConnection();
+            
+            String sql = "insert into factura_emitida (noFactura, id_anexo, id_multa) values (?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            
+            ps.setString(1, noFactura);
+            ps.setString(2, idAnexo);
+            ps.setString(3, idMulta);
+
+            int insert = ps.executeUpdate();
+            
+            if (insert > 0) {
+                System.out.println("FacturaEmitida añadida correctamente.");
+            }
+            
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+    
+    
+    
+    }
+    
+    public void añadirFacturaRecibidaServicio(String noContrato, String idServicio ){
+        try {
+            Connection conn = DBconnection.getInstance().getConnection();
+            
+            String sql = "insert into FacturaRecibidaServicio (noFactura, id_servicio) values (?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            
+            ps.setString(1, noContrato);
+            ps.setString(2, idServicio);
+
+            int insert = ps.executeUpdate();
+            
+            if (insert > 0) {
+                System.out.println("FacturaRecibidaServicio añadida correctamente.");
+            }
+            
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void añadirTelefenosEmpleados(String cedula, String noTelefono){
+        try {
+            Connection conn = DBconnection.getInstance().getConnection();
+            
+            String sql = "insert into telefono_empleado (cedula, telefono) values (?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            
+            ps.setString(1, cedula);
+            ps.setString(2, noTelefono);
+
+            int insert = ps.executeUpdate();
+            
+            if (insert > 0) {
+                System.out.println("TelefenosEmpleado añadida correctamente.");
+            }
+            
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+   
+    }
+    
+    public void añadirTelefenosCliente(String id_cliente, String noTelefono){
+        try {
+            Connection conn = DBconnection.getInstance().getConnection();
+            
+            String sql = "insert into telefono_cliente (id_cliente, telefono) values (?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            
+            ps.setString(1, id_cliente);
+            ps.setString(2, noTelefono);
+
+            int insert = ps.executeUpdate();
+            
+            if (insert > 0) {
+                System.out.println("TelefenosCliente añadida correctamente.");
+            }
+            
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+   
+    }
+   
 }
