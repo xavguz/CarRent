@@ -6,12 +6,11 @@ package ec.edu.espol.carrent;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 
 /**
  *
- * @author Nueva
+ * @author Nue
  */
 public class Añadir {
     
@@ -476,6 +475,51 @@ public class Añadir {
                 System.out.println("FacturaRecibidaServicio añadida correctamente.");
             }
             
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void añadirCorreoCliente(String id_cliente, String correo){
+        try {
+            Connection conn = DBconnection.getInstance().getConnection();
+
+            String sql = "insert into correo_cliente (id_cliente, correo) values (?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+
+            ps.setString(1, id_cliente);
+            ps.setString(2, correo);
+
+            int insert = ps.executeUpdate();
+
+            if (insert > 0) {
+                System.out.println("CorreoCliente añadida correctamente.");
+            }
+
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void añadirCorreoEmpleado(String cedula, String correo){
+        try {
+            Connection conn = DBconnection.getInstance().getConnection();
+
+            String sql = "insert into correo_empleado (cedula, correo) values (?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+
+            ps.setString(1, cedula);
+            ps.setString(2, correo);
+
+            int insert = ps.executeUpdate();
+
+            if (insert > 0) {
+                System.out.println("CorreoCliente añadida correctamente.");
+            }
+
         } catch (Exception  e) {
             e.printStackTrace();
         }
