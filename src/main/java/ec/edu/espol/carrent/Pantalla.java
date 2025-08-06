@@ -102,7 +102,6 @@ public class Pantalla {
                         System.out.println("10. Eliminar registro de la tabla Servicio");
                         System.out.println("11. Eliminar registro de la tabla Modificacion");
                         System.out.println("12. Eliminar registro de la tabla Mantenimiento");
-                        System.out.println("13. Salir");
                         
                         subOpcion = sc.nextInt();
                         sc.nextLine();
@@ -171,7 +170,7 @@ public class Pantalla {
                                 System.out.println("Opcion incorrecta");
                             
                         }
-                    }while (subOpcion != 13);
+                    }while (subOpcion != 12);
                 break;
         }
     }
