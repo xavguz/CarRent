@@ -85,4 +85,22 @@ public class Pantalla {
                 break;
         }
     }
+    
+    public void opciones(){
+        
+        int opcion;
+        
+        do {
+            System.out.println("-----CarRent-----");
+            System.out.println("1. Añadir");
+            System.out.println("2. Consultar");
+            System.out.println("3. Editar");
+            System.out.println("4. Editar");
+            
+            opcion = sc.nextInt();;
+            
+            consultas(opcion);
+        
+        } while (opcion != 3);
+    }
 }
