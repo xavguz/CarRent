@@ -157,28 +157,119 @@ public class Añadir {
     public void añadirVehiculo(String placa, String idAnexo, String idOrdenCompra,
                                     String modelo, String marca, String chasis,
                                     String tipoVehiculo, double kilometraje,
-                                    java.sql.Date anio, String ramv,
+                                    java.sql.Date año, String ramv,
                                     String estado, double pvp){
-    
+        try {
+            Connection conn = DBconnection.getInstance().getConnection();
+            
+            String sql = "insert into Vehiculos (placa, idAnexo, idOrdenCompra, modelo, "
+                    + "marca, chasis, tipoVehiculo, kilometraje, año, ramv, estado, pvp) "
+                    + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            
+            ps.setString(1, placa);
+            ps.setString(2, idAnexo);
+            ps.setString(3, idOrdenCompra);
+            ps.setString(4, modelo);
+            ps.setString(5, marca);
+            ps.setString(6, chasis);
+            ps.setString(7, tipoVehiculo);
+            ps.setDouble(8, kilometraje);
+            ps.setDate(9, año);
+            ps.setString(10, ramv);
+            ps.setString(11, estado);
+            ps.setDouble(12, pvp);
+ 
+
+            int insert = ps.executeUpdate();
+            
+            if (insert > 0) {
+                System.out.println("OrdenCompra añadida correctamente.");
+            }
+            
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
     }
     
     public void añadirAnexo(String idAnexo, String noContrato,
                                 java.sql.Date fechaInicio, String tipoUsoOperativo,
                                 java.sql.Date fechaFin, double costo){
-    
+        try {
+            Connection conn = DBconnection.getInstance().getConnection();
+            
+            String sql = "insert into Anexo (idAnexo, noContrato, fechaInicio, tipoUsoOperativo, "
+                    + "fechaFin, costo) values (?, ?, ?, ?, ?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            
+            ps.setString(1, idAnexo);
+            ps.setString(2, noContrato);
+            ps.setDate(3, fechaInicio);
+            ps.setString(4, tipoUsoOperativo);
+            ps.setDate(5, fechaFin);
+            ps.setDouble(6, costo);
+
+            int insert = ps.executeUpdate();
+            
+            if (insert > 0) {
+                System.out.println("OrdenCompra añadida correctamente.");
+            }
+            
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
     }
     
     public void añadirServicio(String idServicio, java.sql.Date fecha, double costo, String lugar){
-    
+        try {
+            Connection conn = DBconnection.getInstance().getConnection();
+            
+            String sql = "insert into Servicio (idServicio, fecha, costo, lugar) values (?, ?, ?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            
+            ps.setString(1, idServicio);
+            ps.setDate(2, fecha);
+            ps.setDouble(3, costo);
+            ps.setString(4, lugar);
+
+            int insert = ps.executeUpdate();
+            
+            if (insert > 0) {
+                System.out.println("OrdenCompra añadida correctamente.");
+            }
+            
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
     }
     
     public void añadirFactura(String noFactura, java.sql.Date fechaEmision,
                                   String estadoPago, java.sql.Date fechaPago,
                                   double monto, String metodoPago){
-    
+        try {
+            Connection conn = DBconnection.getInstance().getConnection();
+            
+            String sql = "insert into Factura (noFactura, fechaEmision, estadoPago, fechaPago, "
+                    + "monto, metodoPago) values (?, ?, ?, ?, ?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            
+            ps.setString(1, noFactura);
+            ps.setDate(2, fechaEmision);
+            ps.setString(3, estadoPago);
+            ps.setDate(4, fechaPago);
+
+            int insert = ps.executeUpdate();
+            
+            if (insert > 0) {
+                System.out.println("OrdenCompra añadida correctamente.");
+            }
+            
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
     }
-    
-    
-    
-    
 }
