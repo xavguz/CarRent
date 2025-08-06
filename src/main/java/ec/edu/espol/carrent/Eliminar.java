@@ -63,15 +63,15 @@ public class Eliminar {
             int filas = stmt.executeUpdate();
  
             if (filas > 0) {
-                System.out.println("Cliente eliminado correctamente.");
+                System.out.println("Datos eliminados correctamente.");
             } else {
-                System.out.println("No se encontró un cliente con ese ID.");
+                System.out.println("No se encontró un registro con ese Dato.");
             }
 
             stmt.close();
 
         } catch (SQLException e) {
-            System.out.println("Error al eliminar cliente: " + e.getMessage());
+            System.out.println("Error al eliminar el registro: " + e.getMessage());
         }
     }
     
