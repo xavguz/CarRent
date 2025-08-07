@@ -17,8 +17,8 @@ public class CarRent {
 
     public static void main(String[] args) {
         
-        Pantalla p = new Pantalla();
+        Interfaz p = new Interfaz();
         
-        p.mostrarReportes();
+        p.inicio();
     }
 }

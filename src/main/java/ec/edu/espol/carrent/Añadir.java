@@ -38,18 +38,19 @@ public class Añadir {
     }
     
     
-    public void añadirEmpleados(String cedula, String nombre, String apellido, String id_sucursal){
+    public void añadirEmpleados(String cedula, String nombre, String apellido, String cargo, String id_sucursal){
         try {
             Connection conn = DBconnection.getInstance().getConnection();
             
-            String sql = "insert into Empleados (cedula, nombre, apellido,id_sucursal) values (?, ?, ?, ?)";
+            String sql = "insert into Empleados (cedula, nombre, apellido,id_sucursal) values (?, ?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
 
             
             ps.setString(1, cedula);
             ps.setString(2, nombre);
             ps.setString(3, apellido);
-            ps.setString(4, id_sucursal);
+            ps.setString(4, cargo);
+            ps.setString(5, id_sucursal);
 
             int insert = ps.executeUpdate();
             
@@ -63,17 +64,15 @@ public class Añadir {
     }   
     
     
-    public void añadirCliente(String id_cliente, boolean aprobado){
+    public void añadirCliente(String id_cliente){
         try {
             Connection conn = DBconnection.getInstance().getConnection();
             
-            String sql = "insert into Cliente (id_cliente, aprobado) values (?, ?)";
+            String sql = "insert into Cliente (id_cliente) values (?)";
             PreparedStatement ps = conn.prepareStatement(sql);
 
             
             ps.setString(1, id_cliente);
-            ps.setBoolean(2, aprobado);
- 
 
             int insert = ps.executeUpdate();
             
