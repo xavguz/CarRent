@@ -95,7 +95,7 @@ public class Interfaz {
     
     public int mostrarMenuAñadir() {
         System.out.println("===== MENÚ AÑADIR =====");
-        System.out.print("Seleccione una opción: ");
+        System.out.println("Seleccione una opción: ");
         System.out.println("1. Ingresar cliente");
         System.out.println("2. Ingresar sucursal");
         System.out.println("3. Ingresar empleado");
