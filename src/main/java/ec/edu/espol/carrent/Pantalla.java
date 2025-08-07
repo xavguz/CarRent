@@ -202,61 +202,61 @@ public class Pantalla {
                         sc.nextLine();
                         
                         switch (subOpcion3) {
-                            case 1: // Editar Anexo
+                            case 1:
                                 editarAnexoSelectivo();
                                 break;
-                            case 2: // Editar Cliente
+                            case 2: 
                                 editarClienteSelectivo();
                                 break;
-                            case 3: // Editar Cliente Empresa
+                            case 3:
                                 editarClienteEmpresaSelectivo();
                                 break;
-                            case 4: // Editar Cliente Natural
+                            case 4: 
                                 editarClienteNaturalSelectivo();
                                 break;
-                            case 5: // Editar Contrato
+                            case 5: 
                                 editarContratoSelectivo();
                                 break;
-                            case 6: // Editar Correo Cliente
+                            case 6: 
                                 editarCorreoClienteSelectivo();
                                 break;
-                            case 7: // Editar Correo Empleado
+                            case 7:
                                 editarCorreoEmpleadoSelectivo();
                                 break;
-                            case 8: // Editar Empleado
+                            case 8: 
                                 editarEmpleadoSelectivo();
                                 break;
-                            case 9: // Editar Factura
+                            case 9: 
                                 editarFacturaSelectivo();
                                 break;
-                            case 10: // Editar Factura Emitida
+                            case 10: 
                                 editarFacturaEmitidaSelectivo();
                                 break;
-                            case 11: // Editar Mantenimiento
+                            case 11: 
                                 editarMantenimientoSelectivo();
                                 break;
-                            case 12: // Editar Modificacion
+                            case 12: 
                                 editarModificacionSelectivo();
                                 break;
-                            case 13: // Editar Multa
+                            case 13:
                                 editarMultaSelectivo();
                                 break;
-                            case 14: // Editar Orden de Compra
+                            case 14: 
                                 editarOrdenCompraSelectivo();
                                 break;
-                            case 15: // Editar Servicio
+                            case 15: 
                                 editarServicioSelectivo();
                                 break;
-                            case 16: // Editar Sucursal
+                            case 16: 
                                 editarSucursalSelectivo();
                                 break;
-                            case 17: // Editar Telefono Cliente
+                            case 17: 
                                 editarTelefonoClienteSelectivo();
                                 break;
-                            case 18: // Editar Telefono Empleado
+                            case 18:
                                 editarTelefonoEmpleadoSelectivo();
                                 break;
-                            case 19: // Editar Vehiculo
+                            case 19: 
                                 editarVehiculoSelectivo();
                                 break;
                             default:
@@ -265,13 +265,10 @@ public class Pantalla {
                     } while (subOpcion3 != 20);
                     break;
                 
-                // AGREGAR estos métodos nuevos a la clase:
-                
                 private void editarAnexoSelectivo() {
                     System.out.println("Escriba el id del Anexo:");
                     String idAnexo = sc.nextLine();
                     
-                    // Mostrar valores actuales
                     mostrarAnexoActual(idAnexo);
                     
                     System.out.println("¿Cambiar numero de Contrato? (s/n):");
@@ -828,8 +825,6 @@ public class Pantalla {
                         editar.editarCampo("Vehiculos", "placa", placa, "pvp", pvp);
                     }
                 }
-                
-                // MÉTODOS PARA MOSTRAR VALORES ACTUALES - Agregar estos métodos:
                 
                 private void mostrarAnexoActual(String idAnexo) {
                     try {
