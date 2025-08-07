@@ -15,10 +15,11 @@ import java.sql.SQLException;
  * @author Nueva
  */
 public class Pantalla {
+    
     Eliminar eliminar = new Eliminar();
+    Consultar consultar = new Consultar();
     
     Scanner sc = new Scanner(System.in);
-    Consultar consultar = new Consultar();
     
     public void mostrarReportes(){
         

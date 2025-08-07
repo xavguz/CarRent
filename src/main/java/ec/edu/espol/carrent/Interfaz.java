@@ -13,6 +13,8 @@ import java.util.Scanner;
 public class Interfaz {
     Scanner sc = new Scanner(System.in);
     IngresoDatos iD = new IngresoDatos();
+    IngresoDatosEliminar iDE = new IngresoDatosEliminar();
+    Consultar c = new Consultar();
     
     public void inicio(){
         
@@ -24,16 +26,16 @@ public class Interfaz {
             System.out.println("2. Consultar");
             System.out.println("3. Editar");
             System.out.println("4. Eliminar");  
-            System.out.println("5. Salir");
+            System.out.println("5. SALIR");
             
             opcion = sc.nextInt();
-            consultas(opcion);
+            opciones(opcion);
 
         } while (opcion != 5);
 
     }
     
-    public void consultas(int opcion){
+    public void opciones(int opcion){
         switch (opcion){
             case 1:
                 añadir();
@@ -47,6 +49,9 @@ public class Interfaz {
             case 4:
                 eliminar();
                 break;
+            default:
+                System.out.println("Opcion incorrecta");  
+                inicio();
         }
     }
     
@@ -84,14 +89,128 @@ public class Interfaz {
             case 10:
                 iD.ingresarMulta();
                 break;
+                
         }
     }
     
-    public void consultar(){}
+    public void eliminar(){
+        int opcion = mostrarMenuEliminar();
+
+        switch (opcion){
+            case 1:
+                iDE.eliminarCliente();
+                break;
+            case 2:
+                iDE.eliminarVehiculo();
+                break;
+            case 3:
+                iDE.eliminarAnexo();
+                break;
+            case 4:
+                iDE.eliminarFactura();
+                break;
+            case 5:
+                iDE.eliminarSucursal();
+                break;
+            case 6:
+                iDE.eliminarContrato();
+                break;
+            case 7:
+                iDE.eliminarOrdenDeCompra();
+                break;
+            case 8:
+                iDE.eliminarEmpleado();
+                break;    
+            case 9:
+                iDE.eliminarMulta();
+                break;
+            case 10:
+                iDE.elimnarServicio();
+                break;
+            case 11:
+                iDE.eliminarModificacion();
+                break;    
+            case 12:
+                iDE.eliminarMantenimiento();
+                break;    
+        }
+    }
     
-    public void editar(){}
+    public void editar(){
+        
     
-    public void eliminar(){}
+    }
+    
+    public void consultar(){
+        int opcion = mostrarMenuConsultar();
+        
+        switch (opcion) {
+            case 1:
+                c.consultarAnexo();
+                break;
+            case 2:
+                c.consultarCliente();
+                break;
+            case 3:
+                c.consultarClienteEmpresa();
+               break;
+            case 4:
+                c.consultarClienteNatural();
+                break;
+            case 5:
+                c.consultarContrato();
+                break;
+            case 6:
+                c.consultarCorreoCliente();
+                break;
+            case 7:
+                c.consultarCorreoEmpleado();
+                break;
+            case 8:
+                c.consultarEmpleado();
+                break;
+            case 9:
+                c.consultarFactura();
+                break;
+            case 10:
+                c.consultarFacturaEmitida();
+                break;
+            case 11:
+                c.consultarFacturaRecibida();
+                break;
+            case 12:
+                c.consultarFacturaRecibidaServicio();
+                break;
+            case 13:
+                c.consultarMantenimientos();
+                break;
+            case 14:
+                c.consultarModificaciones();
+                break;
+            case 15:
+                c.consultarMultas();
+                break;
+            case 16:
+                c.consultarOrdenCompra();
+                break;
+            case 17:
+                c.consultarServicios();
+                break;
+            case 18:
+                c.consultarSucursal();
+                break;
+            case 19:
+                c.consultarTelefonoCliente();
+                break;
+            case 20:
+                c.consultarTelefonoEmpleado();
+                break;
+            case 21:
+                c.consultarVehiculos();
+                break;
+            
+        }
+    }    
     
     public int mostrarMenuAñadir() {
         System.out.println("===== MENÚ AÑADIR =====");
@@ -106,6 +225,60 @@ public class Interfaz {
         System.out.println("8. Ingresar servicio");
         System.out.println("9. Ingresar factura");
         System.out.println("10. Ingresar multa");
+        System.out.println("11. SALIR");
+
+        int opcion = sc.nextInt();
+        sc.nextLine(); 
+
+        return opcion;
+    }
+    
+    public int mostrarMenuConsultar() {
+        System.out.println("===== MENÚ CONSULTAS =====");
+        System.out.println("1. Consultar Anexos");
+        System.out.println("2. Consultar Clientes");
+        System.out.println("3. Consultar Clientes Empesariales");
+        System.out.println("4. Consultar Clientes Naturales");
+        System.out.println("5. Consultar Contratos");
+        System.out.println("6. Consultar Correos de Clientes");
+        System.out.println("7. Consultar Correos de Empleados");
+        System.out.println("8. Consultar Empleados");
+        System.out.println("9. Consultar Registro de Facturas");
+        System.out.println("10. Consultar Facturas Emitidas");
+        System.out.println("11. Consultar Facturas Recibidas");
+        System.out.println("12. Consultar Facturas Recibidas de Servicios");
+        System.out.println("13. Consultar Mantenimientos");
+        System.out.println("14. Consultar Modificaciones");
+        System.out.println("15. Consultar Multas");
+        System.out.println("16. Consultar Ordenes de Compra");
+        System.out.println("17. Consultar Servicios");
+        System.out.println("18. Consultar Sucursales");
+        System.out.println("19. Consultar Telefonos de Clientes");
+        System.out.println("20. Consultar Telefonos de Empleados");
+        System.out.println("21. Consultar Vehiculos");
+        System.out.println("22. SALIR");
+
+        int opcion = sc.nextInt();
+        sc.nextLine(); 
+
+        return opcion;
+    }
+    
+    public int mostrarMenuEliminar() {
+        System.out.println("===== MENÚ ELIMINAR =====");
+        System.out.println("1. Eliminar registro de la tabla Cliente");
+        System.out.println("2. Eliminar registro de la tabla Vehiculo");
+        System.out.println("3. Eliminar registro de la tabla Anexo");
+        System.out.println("4. Eliminar registro de la tabla Sucursal");
+        System.out.println("5. Eliminar registro de la tabla Factura");
+        System.out.println("6. Eliminar registro de la tabla Contrato");
+        System.out.println("7. Eliminar registro de la tabla OrdenDeCompra");
+        System.out.println("8. Eliminar registro de la tabla Empleado");
+        System.out.println("9. Eliminar registro de la tabla Multa");
+        System.out.println("10. Eliminar registro de la tabla Servicio");
+        System.out.println("11. Eliminar registro de la tabla Modificacion");
+        System.out.println("12. Eliminar registro de la tabla Mantenimiento");
+        System.out.println("13. SALIR");
 
         int opcion = sc.nextInt();
         sc.nextLine(); 
