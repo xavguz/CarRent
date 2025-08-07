@@ -29,6 +29,7 @@ public class Pantalla {
             System.out.println("2. Mostrar Ingresos");
             System.out.println("3. Eliminar Registros");
             System.out.println("4. Salir");
+            System.out.println("5. Editar Registros");
             
             opcion = sc.nextInt();
             
