@@ -1,4 +1,16 @@
+<<<<<<< HEAD
 C:\Users\compu\CarRent\src\main\java\ec\edu\espol\carrent\CarRent.java
 C:\Users\compu\CarRent\src\main\java\ec\edu\espol\carrent\Consultar.java
 C:\Users\compu\CarRent\src\main\java\ec\edu\espol\carrent\DBconnection.java
+=======
+C:\Users\compu\CarRent\src\main\java\ec\edu\espol\carrent\Añadir.java
+C:\Users\compu\CarRent\src\main\java\ec\edu\espol\carrent\CarRent.java
+C:\Users\compu\CarRent\src\main\java\ec\edu\espol\carrent\Consultar.java
+C:\Users\compu\CarRent\src\main\java\ec\edu\espol\carrent\ConsultasAvance1.java
+C:\Users\compu\CarRent\src\main\java\ec\edu\espol\carrent\DBconnection.java
+C:\Users\compu\CarRent\src\main\java\ec\edu\espol\carrent\Eliminar.java
+C:\Users\compu\CarRent\src\main\java\ec\edu\espol\carrent\IngresoDatos.java
+C:\Users\compu\CarRent\src\main\java\ec\edu\espol\carrent\IngresoDatosEliminar.java
+C:\Users\compu\CarRent\src\main\java\ec\edu\espol\carrent\Interfaz.java
+>>>>>>> 9c3966f7d389ecaf1ee9f24f671e8e0689c5706b
 C:\Users\compu\CarRent\src\main\java\ec\edu\espol\carrent\Pantalla.java
