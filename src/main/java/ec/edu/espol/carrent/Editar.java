@@ -1,182 +1,391 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package ec.edu.espol.carrent;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Date;
-import java.math.BigDecimal;
+import java.util.Scanner;
 
+/**
+ *
+ * @author usuario
+ */
 public class Editar {
     
-    private void ejecutarActualizacion(String sql, Object... parametros) {
-        try {
-            Connection con = DBconnection.getInstance().getConnection();
-            PreparedStatement stmt = con.prepareStatement(sql);
-            
-            for (int i = 0; i < parametros.length; i++) {
-                stmt.setObject(i + 1, parametros[i]);
-            }
-            
-            int filas = stmt.executeUpdate();
-            
-            if (filas > 0) {
-                System.out.println("Registro actualizado correctamente.");
-            } else {
-                System.out.println("No se encontró el registro para actualizar.");
-            }
-            
-            stmt.close();
-            
-        } catch (SQLException e) {
-            System.out.println("Error al actualizar registro: " + e.getMessage());
-        }
-    }
+    private Scanner sc = new Scanner(System.in);
     
-    public void editarAnexo(String id_anexo, String noContrato, Date fecha_inicio, 
-                           String tipo_uso_operativo, Date fecha_fin, BigDecimal costo) {
-        String sql = "UPDATE Anexo SET noContrato = ?, fecha_inicio = ?, tipo_uso_operativo = ?, " +
-                    "fecha_fin = ?, costo = ? WHERE id_anexo = ?";
-        ejecutarActualizacion(sql, noContrato, fecha_inicio, tipo_uso_operativo, 
-                            fecha_fin, costo, id_anexo);
-    }
-    
-    public void editarCliente(String id_cliente, boolean aprobado) {
-        String sql = "UPDATE Cliente SET aprobado = ? WHERE id_cliente = ?";
-        ejecutarActualizacion(sql, aprobado, id_cliente);
-    }
-    
-    public void editarContrato(String noContrato, String id_sucursal, String id_cliente, 
-                              String tipo_contrato, Date fecha_emision, boolean seguro, 
-                              boolean estado, String km_establecidos, Date dia_pago) {
-        String sql = "UPDATE Contrato SET id_sucursal = ?, id_cliente = ?, tipo_contrato = ?, " +
-                    "fecha_emision = ?, seguro = ?, estado = ?, km_establecidos = ?, dia_pago = ? " +
-                    "WHERE noContrato = ?";
-        ejecutarActualizacion(sql, id_sucursal, id_cliente, tipo_contrato, fecha_emision, 
-                            seguro, estado, km_establecidos, dia_pago, noContrato);
-    }
-    
-    public void editarEmpleado(String cedula, String nombre, String apellido, 
-                              String cargo, String id_sucursal) {
-        String sql = "UPDATE Empleados SET nombre = ?, apellido = ?, cargo = ?, " +
-                    "id_sucursal = ? WHERE cedula = ?";
-        ejecutarActualizacion(sql, nombre, apellido, cargo, id_sucursal, cedula);
-    }
-    
-    public void editarFactura(String noFactura, Date fecha_emision, String estado_pago, 
-                             Date fecha_pago, BigDecimal monto, String metodo_pago) {
-        String sql = "UPDATE Factura SET fecha_emision = ?, estado_pago = ?, fecha_pago = ?, " +
-                    "monto = ?, metodo_pago = ? WHERE noFactura = ?";
-        ejecutarActualizacion(sql, fecha_emision, estado_pago, fecha_pago, 
-                            monto, metodo_pago, noFactura);
-    }
-    
-    public void editarMantenimiento(String id_servicio_mantemiento, String causa) {
-        String sql = "UPDATE Mantenimientos SET causa = ? WHERE id_servicio_mantemiento = ?";
-        ejecutarActualizacion(sql, causa, id_servicio_mantemiento);
-    }
-    
-    public void editarModificacion(String id_servicio_modificacion, String tipo_modificacion) {
-        String sql = "UPDATE Modificaciones SET tipo_modificacion = ? WHERE id_servicio_modificacion = ?";
-        ejecutarActualizacion(sql, tipo_modificacion, id_servicio_modificacion);
-    }
-    
-    public void editarMulta(String id_multa, String id_cliente, Date fecha, String causa, BigDecimal costo) {
-        String sql = "UPDATE Multa SET id_cliente = ?, fecha = ?, causa = ?, costo = ? WHERE id_multa = ?";
-        ejecutarActualizacion(sql, id_cliente, fecha, causa, costo, id_multa);
-    }
-    
-    public void editarOrdenCompra(String id_orden_compra, String id_anexo, Date fecha_emision, 
-                                 String estado, Date fecha_entrega, BigDecimal monto, String concecionaria) {
-        String sql = "UPDATE Orden_Compra SET id_anexo = ?, fecha_emision = ?, estado = ?, " +
-                    "fecha_entrega = ?, monto = ?, concecionaria = ? WHERE id_orden_compra = ?";
-        ejecutarActualizacion(sql, id_anexo, fecha_emision, estado, fecha_entrega, 
-                            monto, concecionaria, id_orden_compra);
-    }
-    
-    public void editarServicio(String id_servicio, Date fecha, BigDecimal costo, String lugar) {
-        String sql = "UPDATE Servicios SET fecha = ?, costo = ?, lugar = ? WHERE id_servicio = ?";
-        ejecutarActualizacion(sql, fecha, costo, lugar, id_servicio);
-    }
-    
-    public void editarSucursal(String id_sucursal, String ciudad, String direccion) {
-        String sql = "UPDATE Sucursal SET ciudad = ?, direccion = ? WHERE id_sucursal = ?";
-        ejecutarActualizacion(sql, ciudad, direccion, id_sucursal);
-    }
-    
-    public void editarVehiculo(String placa, String id_anexo, String id_orden_compra, 
-                              String modelo, String marca, String chasis, String tipo_vehiculo,
-                              BigDecimal kilometraje, Date año, String ramv, String estado, BigDecimal pvp) {
-        String sql = "UPDATE Vehiculos SET id_anexo = ?, id_orden_compra = ?, modelo = ?, " +
-                    "marca = ?, chasis = ?, tipo_vehiculo = ?, kilometraje = ?, año = ?, ramv = ?, " +
-                    "estado = ?, pvp = ? WHERE placa = ?";
-        ejecutarActualizacion(sql, id_anexo, id_orden_compra, modelo, marca, chasis, tipo_vehiculo,
-                            kilometraje, año, ramv, estado, pvp, placa);
-    }
-    
-    public void editarClienteEmpresa(String id_cliente, String RUC, String nombre) {
-        String sql = "UPDATE cliente_empresa SET RUC = ?, nombre = ? WHERE id_cliente = ?";
-        ejecutarActualizacion(sql, RUC, nombre, id_cliente);
-    }
-    
-    public void editarClienteNatural(String id_cliente, String cedula, String nombre, String apellido) {
-        String sql = "UPDATE cliente_natural SET cedula = ?, nombre = ?, apellido = ? WHERE id_cliente = ?";
-        ejecutarActualizacion(sql, cedula, nombre, apellido, id_cliente);
-    }
-    
-    public void editarCorreoCliente(String id_cliente, String correoAntiguo, String correoNuevo) {
-        String sql = "UPDATE correo_cliente SET correo = ? WHERE id_cliente = ? AND correo = ?";
-        ejecutarActualizacion(sql, correoNuevo, id_cliente, correoAntiguo);
-    }
-    
-    public void editarCorreoEmpleado(String cedula, String correoAntiguo, String correoNuevo) {
-        String sql = "UPDATE correo_empleado SET correo = ? WHERE cedula = ? AND correo = ?";
-        ejecutarActualizacion(sql, correoNuevo, cedula, correoAntiguo);
-    }
-    
-    public void editarFacturaEmitida(String noFactura, String id_anexo, String id_multa) {
-        String sql = "UPDATE factura_emitida SET id_multa = ? WHERE noFactura = ? AND id_anexo = ?";
-        ejecutarActualizacion(sql, id_multa, noFactura, id_anexo);
-    }
-    
-    public void editarFacturaRecibida(String noFactura, String id_orden_compra) {
-        String sql = "SELECT 1 FROM factura_recibida WHERE noFactura = ? AND id_orden_compra = ?";
-    }
-    
-    public void editarTelefonoCliente(String id_cliente, String telefonoAntiguo, String telefonoNuevo) {
-        String sql = "UPDATE telefono_cliente SET telefono = ? WHERE id_cliente = ? AND telefono = ?";
-        ejecutarActualizacion(sql, telefonoNuevo, id_cliente, telefonoAntiguo);
-    }
-    
-    public void editarTelefonoEmpleado(String cedula, String telefonoAntiguo, String telefonoNuevo) {
-        String sql = "UPDATE telefono_empleado SET telefono = ? WHERE cedula = ? AND telefono = ?";
-        ejecutarActualizacion(sql, telefonoNuevo, cedula, telefonoAntiguo);
-    }
-    
-    public void editarVehiculoServicio(String placa, String id_servicio) {
-        String sqlDelete = "DELETE FROM vehiculo_servicios WHERE placa = ? AND id_servicio = ?";
-        String sqlInsert = "INSERT INTO vehiculo_servicios (placa, id_servicio) VALUES (?, ?)";
-    }
-    
-    public void editarCampo(String tabla, String campoId, String valorId, 
-                           String campoEditar, Object nuevoValor) {
-        String sql = "UPDATE " + tabla + " SET " + campoEditar + " = ? WHERE " + campoId + " = ?";
-        ejecutarActualizacion(sql, nuevoValor, valorId);
-    }
-    
-    public boolean existeRegistro(String tabla, String campoId, String valorId) {
+    // Método genérico para ejecutar actualizaciones
+    private boolean ejecutarActualizacion(String sql, Object... parametros) {
         try {
             Connection conn = DBconnection.getInstance().getConnection();
-            String sql = "SELECT COUNT(*) FROM " + tabla + " WHERE " + campoId + " = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, valorId);
-            
-            var rs = ps.executeQuery();
-            if (rs.next()) {
-                return rs.getInt(1) > 0;
+            for (int i = 0; i < parametros.length; i++) {
+                ps.setObject(i + 1, parametros[i]);
+            }
+            int rows = ps.executeUpdate();
+            if (rows > 0) {
+                System.out.println("Actualización exitosa.");
+                return true;
+            } else {
+                System.out.println("No se pudo actualizar.");
+                return false;
             }
         } catch (SQLException e) {
-            System.err.println("Error al verificar existencia del registro: " + e.getMessage());
+            System.out.println("Error en la actualización: " + e.getMessage());
+            return false;
         }
-        return false;
+    }
+    
+    // Método genérico para verificar existencia
+    private boolean existe(String tabla, String columna, String valor) {
+        try {
+            Connection conn = DBconnection.getInstance().getConnection();
+            String sql = "SELECT COUNT(*) FROM " + tabla + " WHERE " + columna + " = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, valor);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            return rs.getInt(1) > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    // Método genérico para mostrar listados
+    private void mostrarListado(String sql) {
+        try {
+            Connection conn = DBconnection.getInstance().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                System.out.println(formatearResultado(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private String formatearResultado(ResultSet rs) throws SQLException {
+        StringBuilder sb = new StringBuilder();
+        int columnCount = rs.getMetaData().getColumnCount();
+        for (int i = 1; i <= columnCount; i++) {
+            if (i > 1) sb.append(" - ");
+            sb.append(rs.getString(i));
+        }
+        return sb.toString();
+    }
+    
+    public void editarCliente() {
+        System.out.println("===== EDITAR CLIENTE =====");
+        mostrarListado("SELECT id_cliente, aprobado FROM Cliente");
+        
+        System.out.print("ID del cliente: ");
+        String id = sc.nextLine();
+        
+        if (!existe("Cliente", "id_cliente", id)) {
+            System.out.println("Cliente no encontrado.");
+            return;
+        }
+        
+        System.out.print("¿Cambiar estado de aprobación? (s/n): ");
+        if (sc.nextLine().equalsIgnoreCase("s")) {
+            System.out.print("Nuevo estado (1=aprobado, 0=no aprobado): ");
+            int estado = sc.nextInt();
+            sc.nextLine();
+            ejecutarActualizacion("UPDATE Cliente SET aprobado = ? WHERE id_cliente = ?", estado, id);
+        }
+    }
+    
+    public void editarClienteNatural() {
+        System.out.println("===== EDITAR CLIENTE NATURAL =====");
+        mostrarListado("SELECT id_cliente, nombre, apellido, cedula FROM cliente_natural");
+        
+        System.out.print("ID del cliente: ");
+        String id = sc.nextLine();
+        
+        if (!existe("cliente_natural", "id_cliente", id)) {
+            System.out.println("Cliente natural no encontrado.");
+            return;
+        }
+        
+        System.out.print("¿Cambiar cédula? (s/n): ");
+        if (sc.nextLine().equalsIgnoreCase("s")) {
+            System.out.print("Nueva cédula: ");
+            String cedula = sc.nextLine();
+            ejecutarActualizacion("UPDATE cliente_natural SET cedula = ? WHERE id_cliente = ?", cedula, id);
+        }
+        
+        System.out.print("¿Cambiar nombre? (s/n): ");
+        if (sc.nextLine().equalsIgnoreCase("s")) {
+            System.out.print("Nuevo nombre: ");
+            String nombre = sc.nextLine();
+            ejecutarActualizacion("UPDATE cliente_natural SET nombre = ? WHERE id_cliente = ?", nombre, id);
+        }
+        
+        System.out.print("¿Cambiar apellido? (s/n): ");
+        if (sc.nextLine().equalsIgnoreCase("s")) {
+            System.out.print("Nuevo apellido: ");
+            String apellido = sc.nextLine();
+            ejecutarActualizacion("UPDATE cliente_natural SET apellido = ? WHERE id_cliente = ?", apellido, id);
+        }
+    }
+    
+    public void editarClienteEmpresa() {
+        System.out.println("===== EDITAR CLIENTE EMPRESA =====");
+        mostrarListado("SELECT id_cliente, nombre, RUC FROM cliente_empresa");
+        
+        System.out.print("ID del cliente: ");
+        String id = sc.nextLine();
+        
+        if (!existe("cliente_empresa", "id_cliente", id)) {
+            System.out.println("Cliente empresa no encontrado.");
+            return;
+        }
+        
+        System.out.print("¿Cambiar RUC? (s/n): ");
+        if (sc.nextLine().equalsIgnoreCase("s")) {
+            System.out.print("Nuevo RUC: ");
+            String ruc = sc.nextLine();
+            ejecutarActualizacion("UPDATE cliente_empresa SET RUC = ? WHERE id_cliente = ?", ruc, id);
+        }
+        
+        System.out.print("¿Cambiar nombre? (s/n): ");
+        if (sc.nextLine().equalsIgnoreCase("s")) {
+            System.out.print("Nuevo nombre: ");
+            String nombre = sc.nextLine();
+            ejecutarActualizacion("UPDATE cliente_empresa SET nombre = ? WHERE id_cliente = ?", nombre, id);
+        }
+    }
+    
+    public void editarVehiculo() {
+        System.out.println("===== EDITAR VEHÍCULO =====");
+        mostrarListado("SELECT placa, marca, modelo, estado FROM Vehiculos");
+        
+        System.out.print("Placa del vehículo: ");
+        String placa = sc.nextLine();
+        
+        if (!existe("Vehiculos", "placa", placa)) {
+            System.out.println("Vehículo no encontrado.");
+            return;
+        }
+        
+        System.out.print("¿Cambiar modelo? (s/n): ");
+        if (sc.nextLine().equalsIgnoreCase("s")) {
+            System.out.print("Nuevo modelo: ");
+            String modelo = sc.nextLine();
+            ejecutarActualizacion("UPDATE Vehiculos SET modelo = ? WHERE placa = ?", modelo, placa);
+        }
+        
+        System.out.print("¿Cambiar marca? (s/n): ");
+        if (sc.nextLine().equalsIgnoreCase("s")) {
+            System.out.print("Nueva marca: ");
+            String marca = sc.nextLine();
+            ejecutarActualizacion("UPDATE Vehiculos SET marca = ? WHERE placa = ?", marca, placa);
+        }
+        
+        System.out.print("¿Cambiar estado? (s/n): ");
+        if (sc.nextLine().equalsIgnoreCase("s")) {
+            System.out.print("Nuevo estado: ");
+            String estado = sc.nextLine();
+            ejecutarActualizacion("UPDATE Vehiculos SET estado = ? WHERE placa = ?", estado, placa);
+        }
+        
+        System.out.print("¿Cambiar kilometraje? (s/n): ");
+        if (sc.nextLine().equalsIgnoreCase("s")) {
+            System.out.print("Nuevo kilometraje: ");
+            double km = sc.nextDouble();
+            sc.nextLine();
+            ejecutarActualizacion("UPDATE Vehiculos SET kilometraje = ? WHERE placa = ?", km, placa);
+        }
+        
+        System.out.print("¿Cambiar PVP? (s/n): ");
+        if (sc.nextLine().equalsIgnoreCase("s")) {
+            System.out.print("Nuevo PVP: ");
+            double pvp = sc.nextDouble();
+            sc.nextLine();
+            ejecutarActualizacion("UPDATE Vehiculos SET pvp = ? WHERE placa = ?", pvp, placa);
+        }
+    }
+    
+    public void editarEmpleado() {
+        System.out.println("===== EDITAR EMPLEADO =====");
+        mostrarListado("SELECT cedula, nombre, apellido, cargo FROM Empleados");
+        
+        System.out.print("Cédula del empleado: ");
+        String cedula = sc.nextLine();
+        
+        if (!existe("Empleados", "cedula", cedula)) {
+            System.out.println("Empleado no encontrado.");
+            return;
+        }
+        
+        System.out.print("¿Cambiar nombre? (s/n): ");
+        if (sc.nextLine().equalsIgnoreCase("s")) {
+            System.out.print("Nuevo nombre: ");
+            String nombre = sc.nextLine();
+            ejecutarActualizacion("UPDATE Empleados SET nombre = ? WHERE cedula = ?", nombre, cedula);
+        }
+        
+        System.out.print("¿Cambiar apellido? (s/n): ");
+        if (sc.nextLine().equalsIgnoreCase("s")) {
+            System.out.print("Nuevo apellido: ");
+            String apellido = sc.nextLine();
+            ejecutarActualizacion("UPDATE Empleados SET apellido = ? WHERE cedula = ?", apellido, cedula);
+        }
+        
+        System.out.print("¿Cambiar cargo? (s/n): ");
+        if (sc.nextLine().equalsIgnoreCase("s")) {
+            System.out.print("Nuevo cargo: ");
+            String cargo = sc.nextLine();
+            ejecutarActualizacion("UPDATE Empleados SET cargo = ? WHERE cedula = ?", cargo, cedula);
+        }
+        
+        System.out.print("¿Cambiar sucursal? (s/n): ");
+        if (sc.nextLine().equalsIgnoreCase("s")) {
+            System.out.println("Sucursales disponibles:");
+            mostrarListado("SELECT id_sucursal, ciudad FROM Sucursal");
+            System.out.print("ID de sucursal: ");
+            String sucursal = sc.nextLine();
+            ejecutarActualizacion("UPDATE Empleados SET id_sucursal = ? WHERE cedula = ?", sucursal, cedula);
+        }
+    }
+    
+    public void editarContrato() {
+        System.out.println("===== EDITAR CONTRATO =====");
+        mostrarListado("SELECT noContrato, tipo_contrato, estado FROM Contrato");
+        
+        System.out.print("Número de contrato: ");
+        String contrato = sc.nextLine();
+        
+        if (!existe("Contrato", "noContrato", contrato)) {
+            System.out.println("Contrato no encontrado.");
+            return;
+        }
+        
+        System.out.print("¿Cambiar tipo de contrato? (s/n): ");
+        if (sc.nextLine().equalsIgnoreCase("s")) {
+            System.out.print("Nuevo tipo: ");
+            String tipo = sc.nextLine();
+            ejecutarActualizacion("UPDATE Contrato SET tipo_contrato = ? WHERE noContrato = ?", tipo, contrato);
+        }
+        
+        System.out.print("¿Cambiar seguro? (s/n): ");
+        if (sc.nextLine().equalsIgnoreCase("s")) {
+            System.out.print("Seguro (1=sí, 0=no): ");
+            int seguro = sc.nextInt();
+            sc.nextLine();
+            ejecutarActualizacion("UPDATE Contrato SET seguro = ? WHERE noContrato = ?", seguro, contrato);
+        }
+        
+        System.out.print("¿Cambiar estado? (s/n): ");
+        if (sc.nextLine().equalsIgnoreCase("s")) {
+            System.out.print("Estado (1=activo, 0=inactivo): ");
+            int estado = sc.nextInt();
+            sc.nextLine();
+            ejecutarActualizacion("UPDATE Contrato SET estado = ? WHERE noContrato = ?", estado, contrato);
+        }
+        
+        System.out.print("¿Cambiar kilómetros? (s/n): ");
+        if (sc.nextLine().equalsIgnoreCase("s")) {
+            System.out.print("Nuevos kilómetros: ");
+            String km = sc.nextLine();
+            ejecutarActualizacion("UPDATE Contrato SET km_establecidos = ? WHERE noContrato = ?", km, contrato);
+        }
+    }
+    
+    public void editarSucursal() {
+        System.out.println("===== EDITAR SUCURSAL =====");
+        mostrarListado("SELECT id_sucursal, ciudad, direccion FROM Sucursal");
+        
+        System.out.print("ID de sucursal: ");
+        String id = sc.nextLine();
+        
+        if (!existe("Sucursal", "id_sucursal", id)) {
+            System.out.println("Sucursal no encontrada.");
+            return;
+        }
+        
+        System.out.print("¿Cambiar ciudad? (s/n): ");
+        if (sc.nextLine().equalsIgnoreCase("s")) {
+            System.out.print("Nueva ciudad: ");
+            String ciudad = sc.nextLine();
+            ejecutarActualizacion("UPDATE Sucursal SET ciudad = ? WHERE id_sucursal = ?", ciudad, id);
+        }
+        
+        System.out.print("¿Cambiar dirección? (s/n): ");
+        if (sc.nextLine().equalsIgnoreCase("s")) {
+            System.out.print("Nueva dirección: ");
+            String direccion = sc.nextLine();
+            ejecutarActualizacion("UPDATE Sucursal SET direccion = ? WHERE id_sucursal = ?", direccion, id);
+        }
+    }
+    
+    public void editarFactura() {
+        System.out.println("===== EDITAR FACTURA =====");
+        mostrarListado("SELECT noFactura, estado_pago, monto FROM Factura");
+        
+        System.out.print("Número de factura: ");
+        String factura = sc.nextLine();
+        
+        if (!existe("Factura", "noFactura", factura)) {
+            System.out.println("Factura no encontrada.");
+            return;
+        }
+        
+        System.out.print("¿Cambiar estado de pago? (s/n): ");
+        if (sc.nextLine().equalsIgnoreCase("s")) {
+            System.out.print("Nuevo estado: ");
+            String estado = sc.nextLine();
+            ejecutarActualizacion("UPDATE Factura SET estado_pago = ? WHERE noFactura = ?", estado, factura);
+        }
+        
+        System.out.print("¿Cambiar método de pago? (s/n): ");
+        if (sc.nextLine().equalsIgnoreCase("s")) {
+            System.out.print("Nuevo método: ");
+            String metodo = sc.nextLine();
+            ejecutarActualizacion("UPDATE Factura SET metodo_pago = ? WHERE noFactura = ?", metodo, factura);
+        }
+        
+        System.out.print("¿Cambiar monto? (s/n): ");
+        if (sc.nextLine().equalsIgnoreCase("s")) {
+            System.out.print("Nuevo monto: ");
+            double monto = sc.nextDouble();
+            sc.nextLine();
+            ejecutarActualizacion("UPDATE Factura SET monto = ? WHERE noFactura = ?", monto, factura);
+        }
+    }
+    
+    public void editarMulta() {
+        System.out.println("===== EDITAR MULTA =====");
+        mostrarListado("SELECT id_multa, causa, costo FROM Multa");
+        
+        System.out.print("ID de multa: ");
+        String id = sc.nextLine();
+        
+        if (!existe("Multa", "id_multa", id)) {
+            System.out.println("Multa no encontrada.");
+            return;
+        }
+        
+        System.out.print("¿Cambiar causa? (s/n): ");
+        if (sc.nextLine().equalsIgnoreCase("s")) {
+            System.out.print("Nueva causa: ");
+            String causa = sc.nextLine();
+            ejecutarActualizacion("UPDATE Multa SET causa = ? WHERE id_multa = ?", causa, id);
+        }
+        
+        System.out.print("¿Cambiar costo? (s/n): ");
+        if (sc.nextLine().equalsIgnoreCase("s")) {
+            System.out.print("Nuevo costo: ");
+            double costo = sc.nextDouble();
+            sc.nextLine();
+            ejecutarActualizacion("UPDATE Multa SET costo = ? WHERE id_multa = ?", costo, id);
+        }
     }
 }
