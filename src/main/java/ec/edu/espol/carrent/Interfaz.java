@@ -60,7 +60,7 @@ public class Interfaz {
         
         switch (opcion){
             case 1:
-                iD.ingresarCliente();
+                eligirTipoCliente();
                 break;
             case 2:
                 iD.ingresarSucursal();
@@ -81,10 +81,10 @@ public class Interfaz {
                 iD.ingresarVehiculo();
                 break;
             case 8:
-                iD.ingresarServicio();
+                eligirTipoServicio();
                 break;    
             case 9:
-                iD.ingresarFactura();
+                elegirTipoFactura();
                 break;
             case 10:
                 iD.ingresarMulta();
@@ -213,7 +213,7 @@ public class Interfaz {
     }    
     
     public int mostrarMenuAñadir() {
-        System.out.println("===== MENÚ AÑADIR =====");
+        System.out.println("===== MENU AÑADIR =====");
         System.out.println("Seleccione una opción: ");
         System.out.println("1. Ingresar cliente");
         System.out.println("2. Ingresar sucursal");
@@ -221,7 +221,7 @@ public class Interfaz {
         System.out.println("4. Ingresar contrato");
         System.out.println("5. Insertar anexo");
         System.out.println("6. Ingresar orden de compra");
-        System.out.println("7. Ingresar vehículo");
+        System.out.println("7. Ingresar vehiculo");
         System.out.println("8. Ingresar servicio");
         System.out.println("9. Ingresar factura");
         System.out.println("10. Ingresar multa");
@@ -234,7 +234,7 @@ public class Interfaz {
     }
     
     public int mostrarMenuConsultar() {
-        System.out.println("===== MENÚ CONSULTAS =====");
+        System.out.println("===== MENU CONSULTAS =====");
         System.out.println("1. Consultar Anexos");
         System.out.println("2. Consultar Clientes");
         System.out.println("3. Consultar Clientes Empesariales");
@@ -265,7 +265,7 @@ public class Interfaz {
     }
     
     public int mostrarMenuEliminar() {
-        System.out.println("===== MENÚ ELIMINAR =====");
+        System.out.println("===== MENU ELIMINAR =====");
         System.out.println("1. Eliminar registro de la tabla Cliente");
         System.out.println("2. Eliminar registro de la tabla Vehiculo");
         System.out.println("3. Eliminar registro de la tabla Anexo");
@@ -285,4 +285,87 @@ public class Interfaz {
 
         return opcion;
     }
+    
+    public int mostrarTipoCliente() {
+        System.out.println("===== ElIGIR TIPO CLIENTE =====");
+        System.out.println("Seleccione una opcion: ");
+        System.out.println("1. Cliente Natural");
+        System.out.println("2. Empresa");
+        System.out.println("3. Salir");
+
+        int opcion = sc.nextInt();
+        sc.nextLine(); 
+
+        return opcion;
+    }
+    
+    public int mostrarTipoSerivicio() {
+        System.out.println("===== ElIGIR TIPO SERVICIO =====");
+        System.out.println("Seleccione una opcion: ");
+        System.out.println("1. Mantenimiento");
+        System.out.println("2. Modificacion");
+        System.out.println("3. Salir");
+
+        int opcion = sc.nextInt();
+        sc.nextLine(); 
+
+        return opcion;
+    }
+    
+    public int mostrarTipoFactura() {
+        System.out.println("===== ElIGIR TIPO FACTURA =====");
+        System.out.println("Seleccione una opcion: ");
+        System.out.println("1. Emitida");
+        System.out.println("2. Factura por orden de compra");
+        System.out.println("3. Factura por servicio");
+        System.out.println("4. Salir");
+
+        int opcion = sc.nextInt();
+        sc.nextLine(); 
+
+        return opcion;
+    }
+    
+    public void eligirTipoCliente(){
+        int opcion = mostrarTipoSerivicio();
+                
+        switch (opcion){
+            case 1:
+                iD.ingresarClienteNatural();
+                break;
+            case 2:
+                iD.ingresarClienteEmpresa();
+                break;        
+        }        
+    }
+    
+    public void eligirTipoServicio(){
+        int opcion = mostrarTipoSerivicio();
+                
+        switch (opcion){
+            case 1:
+                iD.ingresarMantenimiento();
+                break;
+            case 2:
+                iD.ingresarModificacion();
+                break;        
+        }        
+    }
+    
+    public void elegirTipoFactura(){
+        int opcion = mostrarTipoSerivicio();
+                
+        switch (opcion){
+            case 1:
+                iD.ingresarFacturaEmitida();
+                break;
+            case 2:
+                iD.ingresarFacturaOrdenCompra();
+                break;  
+            case 3:
+                iD.ingresarFacturaServicio();
+                break;      
+        } 
+    }
+  
 }
