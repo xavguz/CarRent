@@ -49,9 +49,7 @@ public class Interfaz {
             case 4:
                 eliminar();
                 break;
-            default:
-                System.out.println("Opcion incorrecta");  
-                inicio();
+            
         }
     }
     
@@ -208,7 +206,21 @@ public class Interfaz {
             case 21:
                 c.consultarVehiculos();
                 break;
-            
+            case 22:
+                c.repVehiculosXanio();
+                break;
+            case 23:
+                c.repingresosPorSucursal();
+                break;
+            case 24:
+                c.repmultasPorCliente();
+                break;
+            case 25:
+                c.repvehiculosVendidosPorSucursal();
+            case 0:
+                break;
+            default:
+                System.out.println("Seleccione una opcion valida");
         }
     }    
     
@@ -256,7 +268,11 @@ public class Interfaz {
         System.out.println("19. Consultar Telefonos de Clientes");
         System.out.println("20. Consultar Telefonos de Empleados");
         System.out.println("21. Consultar Vehiculos");
-        System.out.println("22. SALIR");
+        System.out.println("22. Reporte de vehículos alquilados en X anio");
+        System.out.println("23. Reporte de ingresos por sucursal en X anio");
+        System.out.println("24. Reporte de Multas por cliente en X anio");
+        System.out.println("25. Reporte de vehículos vendidos por sucursal");
+        System.out.println("0. SALIR");
 
         int opcion = sc.nextInt();
         sc.nextLine(); 
@@ -285,4 +301,5 @@ public class Interfaz {
 
         return opcion;
     }
+    
 }
