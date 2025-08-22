@@ -7,51 +7,51 @@ import java.sql.SQLException;
 
 public class Eliminar {
     public void eliminarCliente(String id){
-        String sql = "DELETE FROM Cliente WHERE id_cliente = ?" ;
+        String sql = "CALL sp_eliminarCliente(?)" ;
         ejecutarEliminacion(sql , id);
     }
     public void eliminarVehiculo(String id){
-        String sql = "DELETE FROM Vehiculos WHERE placa = ?" ;
+        String sql = "CALL sp_eliminarVechiulo(?)" ;
         ejecutarEliminacion(sql , id);
     }
     public void eliminarAnexo(String id){
-        String sql = "DELETE FROM Anexo WHERE id_anexo = ?" ;
+        String sql = "CALL sp_eliminarAnexo(?)" ;
         ejecutarEliminacion(sql , id);
     }
     public void eliminarFactura(String id){
-        String sql = "DELETE FROM Factura WHERE noFactura = ?" ;
+        String sql = "CALL sp_eliminarFactura(?)" ;
         ejecutarEliminacion(sql , id);
     }
     public void eliminarSucursal(String id){
-        String sql = "DELETE FROM Sucursal WHERE id_sucursal = ?" ;
+        String sql = "CALL sp_eliminarSucursal(?)" ;
         ejecutarEliminacion(sql , id);
     }
     public void eliminarContrato(String id){
-        String sql = "DELETE FROM Contrato WHERE noContrato = ?" ;
+        String sql = "CALL sp_eliminarContrato(?)" ;
         ejecutarEliminacion(sql , id);
     }
     public void eliminarOrdenDeCompra(String id){
-        String sql = "DELETE FROM Orden_Compra WHERE id_orden_compra = ?" ;
+        String sql = "CALL sp_eliminarOrdenCompra(?)" ;
         ejecutarEliminacion(sql , id);
     }
     public void eliminarEmpleado(String id){
-        String sql = "DELETE FROM Empleados WHERE cedula = ?" ;
+        String sql = "CALL sp_eliminarEmpleado(?)" ;
         ejecutarEliminacion(sql , id);
     }
     public void eliminarMulta(String id){
-        String sql = "DELETE FROM Multa WHERE id_multa = ?" ;
+        String sql = "CALL sp_eliminarMulta(?)" ;
         ejecutarEliminacion(sql , id);
     }
     public void eliminarServicio(String id){
-        String sql = "DELETE FROM Servicios WHERE id_servicio = ?" ;
+        String sql = "CALL sp_eliminarServicio(?)" ;
         ejecutarEliminacion(sql , id);
     }
     public void eliminarModificacion(String id){
-        String sql = "DELETE FROM Modificaciones WHERE id_servicio_modificacion = ?" ;
+        String sql = "CALL sp_eliminarModificacion(?)" ;
         ejecutarEliminacion(sql , id);
     }
     public void eliminarMantenimiento(String id){
-        String sql = "DELETE FROM Mantenimientos WHERE id_servicio_mantenimiento = ?" ;
+        String sql = "CALL sp_eliminarMantenimientos(?)" ;
         ejecutarEliminacion(sql , id);
     }
     
@@ -60,14 +60,9 @@ public class Eliminar {
             Connection con = DBconnection.getInstance().getConnection();
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, id);
-            int filas = stmt.executeUpdate();
- 
-            if (filas > 0) {
-                System.out.println("Datos eliminados correctamente.");
-            } else {
-                System.out.println("No se encontró un registro con ese Dato.");
-            }
-
+            stmt.execute();
+      
+            System.out.println("Datos eliminados correctamente.");
             stmt.close();
 
         } catch (SQLException e) {
