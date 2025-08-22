@@ -267,13 +267,13 @@ public class Interfaz {
                 c.repVehiculosXanio();
                 break;
             case 23:
-                c.repingresosPorSucursal();
+                c.repIngresosPorSucursal();
                 break;
             case 24:
-                c.repmultasPorCliente();
+                c.repMultasPorCliente();
                 break;
             case 25:
-                c.repvehiculosVendidosPorSucursal();
+                c.repVehiculosVendidosPorSucursal();
             case 0:
                 break;
             default:

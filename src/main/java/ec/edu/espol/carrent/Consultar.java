@@ -422,9 +422,9 @@ public class Consultar {
     public void repVehiculosXanio() {
     System.out.print("Ingrese el año que desea consultar: ");
     int anio = sc.nextInt();
-    sc.nextLine(); // limpiar buffer
+    sc.nextLine();
 
-    String sql = "{ call sp_vehiculos_alquilados_por_anio(?) }"; // usa el nombre real de tu SP
+    String sql = "{ call sp_vehiculos_alquilados_por_anio(?) }";
 
     try (Connection conn = DBconnection.getInstance().getConnection();
          CallableStatement cs = conn.prepareCall(sql)) {
@@ -448,32 +448,24 @@ public class Consultar {
         }
     }   
     
-    public void repingresosPorSucursal() {
+    public void repIngresosPorSucursal() {
         System.out.print("Ingrese el año que desea consultar: ");
         int anio = sc.nextInt();
         sc.nextLine();
 
-        String sql = """
-            SELECT s.ciudad, SUM(a.costo) AS ingresos_totales
-            FROM Contrato cto
-            JOIN Anexo a ON cto.noContrato = a.noContrato
-            JOIN Sucursal s ON cto.id_sucursal = s.id_sucursal
-            WHERE YEAR(a.fecha_inicio) = ?
-            GROUP BY s.ciudad
-            ORDER BY ingresos_totales DESC;
-        """;
+        String sql = "{ CALL sp_ingresos_por_sucursal(?) }";
 
         try (Connection conn = DBconnection.getInstance().getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+             CallableStatement cs = conn.prepareCall(sql)) {
 
-            ps.setInt(1, anio);
-            ResultSet rs = ps.executeQuery();
+            cs.setInt(1, anio);
+            ResultSet rs = cs.executeQuery();
 
-            System.out.println("===== INGRESOS POR SUCURSAL EN " + anio + " =====");
+            System.out.println("\n===== INGRESOS POR SUCURSAL EN " + anio + " =====");
             while (rs.next()) {
                 System.out.println(
-                        "Sucursal: " + rs.getString("ciudad") +
-                        " | Ingresos: $" + rs.getDouble("ingresos_totales")
+                    "Sucursal: " + rs.getString("ciudad") +
+                    " | Ingresos: $" + rs.getDouble("ingresos_totales")
                 );
             }
         } catch (SQLException e) {
@@ -481,27 +473,18 @@ public class Consultar {
         }
     }
     
-    public void repmultasPorCliente() {
+    public void repMultasPorCliente() {
         System.out.print("Ingrese el año que desea consultar: ");
         int anio = sc.nextInt();
         sc.nextLine();
 
-        String sql = """
-            SELECT c.id_cliente, s.ciudad, COUNT(m.id_multa) AS total_multas, SUM(m.costo) AS costo_total
-            FROM Multa m
-            JOIN Contrato cto ON m.id_cliente = cto.id_cliente
-            JOIN Sucursal s ON cto.id_sucursal = s.id_sucursal
-            JOIN Cliente c ON m.id_cliente = c.id_cliente
-            WHERE YEAR(m.fecha) = ?
-            GROUP BY c.id_cliente, s.ciudad
-            ORDER BY costo_total DESC;
-        """;
+        String sql = "{ CALL sp_multas_por_cliente(?) }";
 
         try (Connection conn = DBconnection.getInstance().getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+            CallableStatement cs = conn.prepareCall(sql)) {
 
-            ps.setInt(1, anio);
-            ResultSet rs = ps.executeQuery();
+            cs.setInt(1, anio);
+            ResultSet rs = cs.executeQuery();
 
             System.out.println("\n===== MULTAS POR CLIENTE EN " + anio + " =====");
             while (rs.next()) {
@@ -517,27 +500,18 @@ public class Consultar {
         }
     }
     
-    public void repvehiculosVendidosPorSucursal() {
-        System.out.print("Ingrese el año que desea consultar: ");
-        int anio = sc.nextInt();
-        sc.nextLine();
+    public void repVehiculosVendidosPorSucursal() {
+    System.out.print("Ingrese el año que desea consultar: ");
+    int anio = sc.nextInt();
+    sc.nextLine();
 
-        String sql = """
-            SELECT s.ciudad, COUNT(v.placa) AS total_vendidos, SUM(v.pvp) AS monto_total
-            FROM Vehiculos v
-            JOIN Anexo a ON v.id_anexo = a.id_anexo
-            JOIN Contrato c ON a.noContrato = c.noContrato
-            JOIN Sucursal s ON c.id_sucursal = s.id_sucursal
-            WHERE v.estado = 'Vendido' AND YEAR(a.fecha_inicio) = ?
-            GROUP BY s.ciudad
-            ORDER BY monto_total DESC;
-        """;
+    String sql = "{ CALL sp_vehiculos_vendidos_por_sucursal(?) }";
 
         try (Connection conn = DBconnection.getInstance().getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+            CallableStatement cs = conn.prepareCall(sql)) {
 
-            ps.setInt(1, anio);
-            ResultSet rs = ps.executeQuery();
+            cs.setInt(1, anio);
+            ResultSet rs = cs.executeQuery();
 
             System.out.println("\n===== VEHÍCULOS VENDIDOS POR SUCURSAL EN " + anio + " =====");
             while (rs.next()) {
