@@ -136,9 +136,66 @@ public class Interfaz {
         }
     }
     
-    public void editar(){
-        
+    public int mostrarMenuEditar() {
+        System.out.println("===== MENÚ EDITAR =====");
+        System.out.println("Seleccione qué desea editar:");
+        System.out.println("1. Cliente");
+        System.out.println("2. Cliente Natural");
+        System.out.println("3. Cliente Empresa");
+        System.out.println("4. Vehículo");
+        System.out.println("5. Empleado");
+        System.out.println("6. Contrato");
+        System.out.println("7. Sucursal");
+        System.out.println("8. Factura");
+        System.out.println("9. Multa");
+        System.out.println("10. SALIR");
     
+        int opcion = sc.nextInt();
+        sc.nextLine(); // limpiar buffer
+    
+        return opcion;
+    }
+
+    Editar Editar = new Editar();
+
+    public void editar(){
+        int opcion = mostrarMenuEditar();
+    
+    switch (opcion){
+        case 1:
+            Editar.editarCliente();
+            break;
+        case 2:
+            Editar.editarClienteNatural();
+            break;
+        case 3:
+            Editar.editarClienteEmpresa();
+            break;
+        case 4:
+            Editar.editarVehiculo();
+            break;
+        case 5:
+            Editar.editarEmpleado();
+            break;
+        case 6:
+            Editar.editarContrato();
+            break;
+        case 7:
+            Editar.editarSucursal();
+            break;
+        case 8:
+            Editar.editarFactura();
+            break;
+        case 9:
+            Editar.editarMulta();
+            break;
+        default:
+            if (opcion != 10){
+                System.out.println("Opción incorrecta");
+            }else{
+                break;
+            }
+        }
     }
     
     public void consultar(){

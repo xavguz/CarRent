@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\Nueva\Documents\NetBeansProjects\CarRent\src\main\java\archivosviejos\Añadir.java
 C:\Users\Nueva\Documents\NetBeansProjects\CarRent\src\main\java\archivosviejos\ConsultasAvance1.java
 C:\Users\Nueva\Documents\NetBeansProjects\CarRent\src\main\java\archivosviejos\IngresoDatos.java
@@ -10,3 +11,15 @@ C:\Users\Nueva\Documents\NetBeansProjects\CarRent\src\main\java\ec\edu\espol\car
 C:\Users\Nueva\Documents\NetBeansProjects\CarRent\src\main\java\ec\edu\espol\carrent\IngresoDatosEliminar.java
 C:\Users\Nueva\Documents\NetBeansProjects\CarRent\src\main\java\ec\edu\espol\carrent\Interfaz.java
 C:\Users\Nueva\Documents\NetBeansProjects\CarRent\src\main\java\ec\edu\espol\carrent\Pantalla.java
+=======
+C:\Users\compu\CarRent\src\main\java\ec\edu\espol\carrent\Añadir.java
+C:\Users\compu\CarRent\src\main\java\ec\edu\espol\carrent\CarRent.java
+C:\Users\compu\CarRent\src\main\java\ec\edu\espol\carrent\Consultar.java
+C:\Users\compu\CarRent\src\main\java\ec\edu\espol\carrent\ConsultasAvance1.java
+C:\Users\compu\CarRent\src\main\java\ec\edu\espol\carrent\DBconnection.java
+C:\Users\compu\CarRent\src\main\java\ec\edu\espol\carrent\Eliminar.java
+C:\Users\compu\CarRent\src\main\java\ec\edu\espol\carrent\IngresoDatos.java
+C:\Users\compu\CarRent\src\main\java\ec\edu\espol\carrent\IngresoDatosEliminar.java
+C:\Users\compu\CarRent\src\main\java\ec\edu\espol\carrent\Interfaz.java
+C:\Users\compu\CarRent\src\main\java\ec\edu\espol\carrent\Pantalla.java
+>>>>>>> 9cfa2b041b2f04b3f41aeb35a7c119962ae0a568
