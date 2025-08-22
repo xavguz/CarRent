@@ -8,12 +8,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
+import java.sql.CallableStatement;
 
 /**
  *
  * @author usuario
  */
 public class Consultar {
+    
+    private Scanner sc = new Scanner(System.in);
     
     public void consultarAnexo(){
         try {
@@ -415,4 +419,136 @@ public class Consultar {
         }
     }
     
+    public void repVehiculosXanio() {
+    System.out.print("Ingrese el año que desea consultar: ");
+    int anio = sc.nextInt();
+    sc.nextLine(); // limpiar buffer
+
+    String sql = "{ call sp_vehiculos_alquilados_por_anio(?) }"; // usa el nombre real de tu SP
+
+    try (Connection conn = DBconnection.getInstance().getConnection();
+         CallableStatement cs = conn.prepareCall(sql)) {
+
+        cs.setInt(1, anio);
+        ResultSet rs = cs.executeQuery();
+
+        System.out.println("===== VEHÍCULOS ALQUILADOS EN EL AÑO " + anio + " =====");
+        while (rs.next()) {
+            System.out.println(
+                "Cliente ID: " + rs.getInt("id_cliente") +
+                " | Modelo: " + rs.getString("modelo") +
+                " | Tipo: " + rs.getString("tipo_vehiculo") +
+                " | Sucursal: " + rs.getString("sucursal") +
+                " | Inicio: " + rs.getDate("fecha_inicio") +
+                " | Fin: " + rs.getDate("fecha_fin")
+            );
+        }
+        } catch (SQLException e) {
+        System.out.println("Error al ejecutar el procedimiento: " + e.getMessage());
+        }
+    }   
+    
+    public void repingresosPorSucursal() {
+        System.out.print("Ingrese el año que desea consultar: ");
+        int anio = sc.nextInt();
+        sc.nextLine();
+
+        String sql = """
+            SELECT s.ciudad, SUM(a.costo) AS ingresos_totales
+            FROM Contrato cto
+            JOIN Anexo a ON cto.noContrato = a.noContrato
+            JOIN Sucursal s ON cto.id_sucursal = s.id_sucursal
+            WHERE YEAR(a.fecha_inicio) = ?
+            GROUP BY s.ciudad
+            ORDER BY ingresos_totales DESC;
+        """;
+
+        try (Connection conn = DBconnection.getInstance().getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, anio);
+            ResultSet rs = ps.executeQuery();
+
+            System.out.println("===== INGRESOS POR SUCURSAL EN " + anio + " =====");
+            while (rs.next()) {
+                System.out.println(
+                        "Sucursal: " + rs.getString("ciudad") +
+                        " | Ingresos: $" + rs.getDouble("ingresos_totales")
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al ejecutar reporte: " + e.getMessage());
+        }
+    }
+    
+    public void repmultasPorCliente() {
+        System.out.print("Ingrese el año que desea consultar: ");
+        int anio = sc.nextInt();
+        sc.nextLine();
+
+        String sql = """
+            SELECT c.id_cliente, s.ciudad, COUNT(m.id_multa) AS total_multas, SUM(m.costo) AS costo_total
+            FROM Multa m
+            JOIN Contrato cto ON m.id_cliente = cto.id_cliente
+            JOIN Sucursal s ON cto.id_sucursal = s.id_sucursal
+            JOIN Cliente c ON m.id_cliente = c.id_cliente
+            WHERE YEAR(m.fecha) = ?
+            GROUP BY c.id_cliente, s.ciudad
+            ORDER BY costo_total DESC;
+        """;
+
+        try (Connection conn = DBconnection.getInstance().getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, anio);
+            ResultSet rs = ps.executeQuery();
+
+            System.out.println("\n===== MULTAS POR CLIENTE EN " + anio + " =====");
+            while (rs.next()) {
+                System.out.println(
+                    "Cliente ID: " + rs.getInt("id_cliente") +
+                    " | Sucursal: " + rs.getString("ciudad") +
+                    " | Multas: " + rs.getInt("total_multas") +
+                    " | Costo Total: $" + rs.getDouble("costo_total")
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al ejecutar reporte: " + e.getMessage());
+        }
+    }
+    
+    public void repvehiculosVendidosPorSucursal() {
+        System.out.print("Ingrese el año que desea consultar: ");
+        int anio = sc.nextInt();
+        sc.nextLine();
+
+        String sql = """
+            SELECT s.ciudad, COUNT(v.placa) AS total_vendidos, SUM(v.pvp) AS monto_total
+            FROM Vehiculos v
+            JOIN Anexo a ON v.id_anexo = a.id_anexo
+            JOIN Contrato c ON a.noContrato = c.noContrato
+            JOIN Sucursal s ON c.id_sucursal = s.id_sucursal
+            WHERE v.estado = 'Vendido' AND YEAR(a.fecha_inicio) = ?
+            GROUP BY s.ciudad
+            ORDER BY monto_total DESC;
+        """;
+
+        try (Connection conn = DBconnection.getInstance().getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, anio);
+            ResultSet rs = ps.executeQuery();
+
+            System.out.println("\n===== VEHÍCULOS VENDIDOS POR SUCURSAL EN " + anio + " =====");
+            while (rs.next()) {
+                System.out.println(
+                    "Sucursal: " + rs.getString("ciudad") +
+                    " | Vehículos vendidos: " + rs.getInt("total_vendidos") +
+                    " | Monto total: $" + rs.getDouble("monto_total")
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al ejecutar reporte: " + e.getMessage());
+        }
+    }
 }
