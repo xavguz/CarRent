@@ -31,14 +31,11 @@ public class Editar {
                 ps.setObject(i + 1, parametros[i]);
             }
             
-            int rows = ps.executeUpdate();
-            if (rows > 0) {
-                System.out.println("Actualización exitosa.");
-                return true;
-            } else {
-                System.out.println("No se pudo actualizar.");
-                return false;
-            }
+            ps.execute(); 
+            
+            System.out.println("Actualización exitosa.");
+            return true;
+            
         } catch (SQLException e) {
             System.out.println("Error en la actualización: " + e.getMessage());
             return false;
