@@ -400,7 +400,7 @@ public class Interfaz {
     }
     
     public void eligirTipoCliente(){
-        int opcion = mostrarTipoSerivicio();
+        int opcion = mostrarTipoCliente();
                 
         switch (opcion){
             case 1:
@@ -426,7 +426,7 @@ public class Interfaz {
     }
     
     public void elegirTipoFactura(){
-        int opcion = mostrarTipoSerivicio();
+        int opcion = mostrarTipoFactura();
                 
         switch (opcion){
             case 1:
